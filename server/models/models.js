@@ -61,7 +61,7 @@ BasketGoods.belongsTo(Basket)
 
 
 Type.hasMany(Goods)
-Goods>belongsTo(Type)
+Goods.belongsTo(Type)
 
 Brand.hasMany(Goods)
 Goods.belongsTo(Goods)
@@ -78,3 +78,14 @@ GoodsInfo.belongsTo(Goods)
 Type.belongsToMany(Brand, {through: TypeBrand})
 Brand.belongsToMany(Type, {through: TypeBrand})
 
+module.exports = {
+    User,
+    Basket,
+    BasketGoods,
+    Goods,
+    Type,
+    Brand,
+    Rating,
+    TypeBrand,
+    GoodsInfo
+}
