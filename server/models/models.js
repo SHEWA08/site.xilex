@@ -45,3 +45,36 @@ const GoodsInfo = sequelize.define( 'goods_info', {
     description: {type:DataTypes.STRING, allowNull: false},
     
 })
+
+const TypeBrand = sequelize.define( 'type_brand', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+})
+
+User.hasOne(Basket)
+Basket.belongsTo(User)
+
+User.hasMany(Rating)
+Rating.belongsTo(User)
+
+Basket.hasMany(BasketGoods)
+BasketGoods.belongsTo(Basket)
+
+
+Type.hasMany(Goods)
+Goods>belongsTo(Type)
+
+Brand.hasMany(Goods)
+Goods.belongsTo(Goods)
+
+Goods.hasMany(Rating)
+Rating.belongsTo(Goods)
+
+Goods.hasMany(BasketGoods)
+BasketGoods.belongsTo(Goods)
+
+Goods.hasMany(GoodsInfo)
+GoodsInfo.belongsTo(Goods)
+
+Type.belongsToMany(Brand, {through: TypeBrand})
+Brand.belongsToMany(Type, {through: TypeBrand})
+
