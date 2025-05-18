@@ -46,10 +46,6 @@ const GoodsInfo = sequelize.define( 'goods_info', {
     
 })
 
-const TypeBrand = sequelize.define( 'type_brand', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
-
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
@@ -75,8 +71,7 @@ BasketGoods.belongsTo(Goods)
 Goods.hasMany(GoodsInfo)
 GoodsInfo.belongsTo(Goods)
 
-Type.belongsToMany(Brand, {through: TypeBrand})
-Brand.belongsToMany(Type, {through: TypeBrand})
+
 
 module.exports = {
     User,
@@ -86,6 +81,5 @@ module.exports = {
     Type,
     Brand,
     Rating,
-    TypeBrand,
     GoodsInfo
 }
