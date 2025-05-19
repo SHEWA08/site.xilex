@@ -1,16 +1,26 @@
 const uuid = require('uuid')
 const path = require('path')
-const {Goods} = require('../models/models')
+const {Goods, GoodsInfo} = require('../models/models')
 const ApiError = require('../error/ApiError')
 class GoodsController {
     async create(req, res, next) {
         try {
-            const {name, price, brandId, typeId, info, size} = req.body
+            let {name, price, brandId, typeId, info, size} = req.body
         const {img} = req.files
         let fileName = uuid.v4() + ".jpg"
         img.mv(path.resolve(__dirname, '..', 'static', fileName))
+        const goods = await Goods.create({name, price, brandId, typeId, size,  img: fileName})
 
-        const goods = await Goods.create({name, price, brandId, typeId, size,  img: fileName, info})
+        if (info) {
+            info = JSON.parse(info)
+            info.forEach(i =>
+                GoodsInfo.create({
+                    title: i.title,
+                    description: i.description,
+                    goodsId: goods.id
+                })
+            )
+        }
 
         return res.json(goods);
 
@@ -47,7 +57,15 @@ class GoodsController {
         return res.json(goods)
     }
     async getOne(req, res) {
+        const {id} = req.params
+        const goods = await Goods.findOne(
+            {
+                where:{id},
+                include: [{model: GoodsInfo, as: 'info'}]
+        },
 
+        )
+        return res.json(goods)
     }
 }
 
