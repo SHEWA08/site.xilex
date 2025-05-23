@@ -11,6 +11,11 @@ import Container from 'react-bootstrap/Container'
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate();
+
+    const logOut = () => {
+      user.setUser({})
+      user.setIsAuth(false)
+    }
     return (
        <Navbar bg="light" data-bs-theme="light">
         <Container>
@@ -27,7 +32,7 @@ const NavBar = observer(() => {
 
             <Button
              variant={"dark"}
-             onClick={() => navigate(LOGIN_ROUTE)}
+             onClick={() => logOut()}
             className={"ms-2"}
             >
               Выйти
@@ -35,7 +40,7 @@ const NavBar = observer(() => {
           </Nav>
           :
           <Nav style={{color: 'black', marginLeft: 'auto'}}>
-            <Button variant={"dark"}  onClick={ () => user.setIsAuth(true)}>Авторизация</Button>
+            <Button variant={"dark"}  onClick={ () => navigate(LOGIN_ROUTE)}>Авторизация</Button>
           </Nav>
 }
         </Container>

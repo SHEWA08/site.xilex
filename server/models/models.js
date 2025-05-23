@@ -20,7 +20,6 @@ const Goods = sequelize.define( 'goods', {
     name: {type:DataTypes.STRING, unique: true, allowNull: false},
     price: {type:DataTypes.INTEGER, allowNull: false},
     rating: {type:DataTypes.INTEGER, defaultValue: 0},
-    size: {type:DataTypes.INTEGER, allowNull: false},
     img: {type:DataTypes.STRING, allowNull: false},
 })
 

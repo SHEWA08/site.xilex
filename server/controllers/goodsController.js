@@ -33,7 +33,7 @@ class GoodsController {
     async getAll(req, res) {
         let {brandId, typeId, limit, page} = req.query
         page = page || 1
-        limit = limit || 9
+        limit = limit || 25
         let offset = page * limit - limit
         let goods;
         if (!brandId && !typeId) {

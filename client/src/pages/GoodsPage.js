@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Image, Row , Card} from 'react-bootstrap';
 import BigStar from '../assets/BigStar.png'
+import  {useParams} from 'react-router-dom'
+import { fetchOneGoods } from '../http/goodsApi';
 const GoodsPage = () => {
-  const goods = {id: 1, name: "Бутсы Nike Phantom GX Elite", price: 550, rating: 5, img: 'https://purposechurch.com/wp-content/uploads/2017/10/fpo400x300.png'}
-  const description = [
-    {id:1, title: 'Сезон', description: '2024'},
-    {id:2, title: 'Материал подошвы', description: 'TPU'},
-    {id:3, title: 'Тип подошвы', description: 'FG'},
-    {id:4, title: 'Размеры', description: '43'},
-  ]
+  const [goods, setGoods] = useState({info: []})
+  const {id} = useParams()
+useEffect(() => {
+    fetchOneGoods(id).then(data => setGoods(data))
+
+}, [])
+
   return (
     <Container className="mt-3">
       <Row>
         <Col md={4}>
-          <Image width={300} height={300} src={goods.img}/>
+          <Image width={300} height={300} src={process.env.REACT_APP_API_URL + goods.img}/>
 
       </Col>
 
@@ -42,7 +44,7 @@ const GoodsPage = () => {
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Характеристики</h1>
-        {description.map((info, index) =>
+        {goods.info.map((info, index) =>
           <Row key={info.id} style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10 }}>
             {info.title}: {info.description} 
           </Row>
