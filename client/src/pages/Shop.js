@@ -24,7 +24,7 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-    fetchGoods(goods.selectedType.id, goods.selectedBrand, goods.page, 4).then(data => {
+    fetchGoods(goods.selectedType.id, goods.selectedBrand.id, goods.page, 4).then(data => {
       goods.setGoods(data.rows)
       goods.setTotalCount(data.count)
     })

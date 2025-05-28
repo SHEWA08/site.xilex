@@ -36,7 +36,7 @@ const CreateGoods = observer(({show, onHide}) => {
     try {
 
         if (!name.trim()) {
-            throw new Error("Введите название компьютера");
+            throw new Error("Введите название товара");
         }
         
         if (!price ||  isNaN (price) || Number (price) <= 0) {
@@ -51,6 +51,11 @@ const CreateGoods = observer(({show, onHide}) => {
         formData.append("name", name.trim());
         formData.append("price", String(price));
         formData.append("img", file);
+        formData.append("brandId", goods.selectedBrand.id);
+        formData.append("typeId", goods.selectedType.id);
+        
+        
+        
 
         const validInfo = info.filter(i => i.title.trim() && i.description.trim());
         if (validInfo.length > 0) {
