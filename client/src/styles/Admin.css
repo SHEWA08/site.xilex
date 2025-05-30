@@ -1,0 +1,53 @@
+.admin-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #c9e5e6, #70bfd3); 
+    border-radius: 12px;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+}
+
+
+.admin-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #e42f17; 
+}
+
+
+.admin-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 10px;
+    background: #ffffff;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.admin-btn:hover {
+    background: #c2a638;
+    transform: scale(1.05);
+}
+
+.admin-modal {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    color: #222;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}

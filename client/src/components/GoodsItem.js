@@ -4,24 +4,24 @@ import star from '../assets/star.png';
 import Image from "react-bootstrap/Image";
 import { useNavigate } from 'react-router-dom';
 import { GOODS_ROUTE } from '../utils/consts';
+import "../styles/GoodsItem.css"
 
 
 const GoodsItem = ({goods})  => {
     const navigate = useNavigate()
     console.log(navigate)
 
-    return (
-        <Col md={3} className={"mt-4"} onClick={() => navigate(GOODS_ROUTE + '/' + goods.id)}>
-            <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
-                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + goods.img}/>
-                <div className={" text-black-50 mt-1 d-flex justify-content-between align-items-center"}>
-                    <div>Nike...</div>
-                    <div className="d-flex align-items-center">
-                        <div>{goods.rating}</div>
-                        <Image width={18} height={18} src={star}/>
+     return (
+        <Col md={3} className="mt-4 goods-col" onClick={() => navigate(GOODS_ROUTE + '/' + goods.id)}>
+            <Card className="goods-card">
+                <Image className="goods-image" src={process.env.REACT_APP_API_URL + goods.img} />
+                <div className="d-flex justify-content-between align-items-center px-2 pt-2">
+                    <div className="goods-rating">
+                        {goods.rating}
+                        <Image width={16} height={16} src={star} />
                     </div>
                 </div>
-                 <div>{goods.name}</div>
+                <div className="goods-name">{goods.name}</div>
             </Card>
         </Col>
     );

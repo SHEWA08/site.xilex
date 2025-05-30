@@ -5,6 +5,8 @@ import { fetchOneGoods } from '../http/goodsApi';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import { addToBasket, getBasket, removeFromBasket } from '../http/basketApi';
+import "../styles/GoodsPage.css";
+
 
 
 
@@ -51,7 +53,7 @@ const GoodsPage = observer(() => {
     try {
       await addToBasket(goods.id);
       await loadBasketData();
-      showNotification('Игра добавлена в корзину!');
+      showNotification('Товар добавлен в корзину!');
     } catch (e) {
       console.error("Ошибка добавления в корзину:", e);
       showNotification(e.response?.data?.message || 'Ошибка добавления в корзину', 'danger');
@@ -63,7 +65,7 @@ const GoodsPage = observer(() => {
     try {
       await removeFromBasket(basketItemId);
       await loadBasketData();
-      showNotification('Игра удалена из корзины');
+      showNotification('Товар удален из корзины');
     } catch (e) {
       console.error("Ошибка удаления:", e);
       showNotification(e.response?.data?.message || 'Ошибка при удалении', 'danger');
@@ -108,18 +110,18 @@ const renderStars = () => {
 
   if (loading) {
     return (
-      <Container className="game-loading-container">
-        <div className="game-loading-spinner"></div>
+      <Container className="goods-loading-container">
+        <div className="goods-loading-spinner"></div>
       </Container>
     );
   }
 
   return (
-  <Container className="game-page-container">
+  <Container className="goods-page-container">
     {notification && (
       <Alert 
         variant={notification.variant} 
-        className="game-notification"
+        className="goods-notification"
         onClose={() => setNotification(null)} 
         dismissible
       >
@@ -127,16 +129,16 @@ const renderStars = () => {
       </Alert>
     )}
     
-    <Row className="game-header-row">
+    <Row className="goods-header-row">
       <Col lg={8}>
-        <div className="game-title-wrapper">
-          <h1 className="game-title">{goods.name}</h1>
-          <Badge bg="secondary" className="game-genre-badge">{goods.genre}</Badge>
+        <div className="goods-title-wrapper">
+          <h1 className="goods-title">{goods.name}</h1>
+          <Badge bg="secondary" className="goods-genre-badge">{goods.genre}</Badge>
         </div>
         
-        <div className="game-rating-section">
-          <div className="game-rating-stars">{renderStars()}</div>
-          <div className="game-rating-value">
+        <div className="goods-rating-section">
+          <div className="goods-rating-stars">{renderStars()}</div>
+          <div className="goods-rating-value">
             Рейтинг: <strong>{goods.rating?.toFixed(1) || 0}</strong>/5
             {userRating > 0 && (
               <span className="user-rating-badge">Ваша оценка: {userRating}</span>
@@ -146,35 +148,35 @@ const renderStars = () => {
       </Col>
     </Row>
     
-    <Row className="game-main-row align-items-start">
+    <Row className="goods-main-row align-items-start">
       <Col md={8}>
         <Row>
-          <Col md={7} className="game-media-col">
-            <div className="game-image-wrapper">
+          <Col md={7} className="goods-media-col">
+            <div className="goods-image-wrapper">
               <Image 
                 src={process.env.REACT_APP_API_URL + goods.img} 
                 alt={goods.name}
-                className="game-main-image"
+                className="goods-main-image"
                 fluid
               />
             </div>
           </Col>
           
-          <Col md={5} className="game-purchase-col">
-            <Card className="game-purchase-card">
+          <Col md={5} className="goods-purchase-col">
+            <Card className="goods-purchase-card">
               <Card.Body>
-                <div className="game-price-wrapper">
-                  <span className="game-price">{goods.price} $</span>
+                <div className="goods-price-wrapper">
+                  <span className="goods-price">{goods.price} $</span>
                   {goods.discount > 0 && (
-                    <span className="game-discount-badge">-{goods.discount}%</span>
+                    <span className="goods-discount-badge">-{goods.discount}%</span>
                   )}
                 </div>
                 
-                <div className="game-actions">
+                <div className="goods-actions">
                   {isInBasket ? (
                     <Button 
                       variant="danger" 
-                      className="game-action-btn"
+                      className="goods-action-btn"
                       onClick={handleRemoveFromBasket}
                     >
                       Убрать из корзины
@@ -182,7 +184,7 @@ const renderStars = () => {
                   ) : (
                     <Button 
                       variant="success" 
-                      className="game-action-btn"
+                      className="goods-action-btn"
                       onClick={handleAddToBasket}
                     >
                       Добавить в корзину
@@ -194,17 +196,17 @@ const renderStars = () => {
           </Col>
         </Row>
         
-        {/* Переносим блок с описанием сюда */}
+      
         <Row className="mt-4">
           <Col>
-            <Card className="game-specs-card">
+            <Card className="goods-specs-card">
               <Card.Body>
-                <Card.Title className="game-specs-title">Описание</Card.Title>
-                <div className="game-specs-list">
+                <Card.Title className="goods-specs-title">Описание</Card.Title>
+                <div className="goods-specs-list">
                   {goods.info?.map((info, index) => (
-                    <div key={info.id} className="game-spec-item">
-                      <span className="game-spec-title">{info.title}:</span>
-                      <span className="game-spec-value">{info.description}</span>
+                    <div key={info.id} className="goods-spec-item">
+                      <span className="goods-spec-title">{info.title}:</span>
+                      <span className="goods-spec-value">{info.description}</span>
                     </div>
                   ))}
                 </div>

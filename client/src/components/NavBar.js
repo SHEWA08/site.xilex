@@ -33,8 +33,20 @@ const NavBar = observer(() => {
             <NavLink style={{color:'black', textDecoration:'none'}} to={SHOP_ROUTE}>x1lex.by</NavLink>
           {user.isAuth ?
            <Nav className="ml-auto" style={{color: 'black', marginLeft: 'auto'}}>
+
             <Button 
-                                className="me-1"
+                
+                className='ms-2'
+                variant={"dark"}
+                onClick={() => navigate('/about')}
+                 
+            >
+                 О нас
+            </Button>
+
+            <Button 
+
+                                className='ms-2'
                                 variant={"dark"}
                                 onClick={() => navigate(BASKET_ROUTE)}
                             >
@@ -46,17 +58,23 @@ const NavBar = observer(() => {
                                 )}
                             </Button>
             <Button 
+            className='ms-2'
             variant={"dark"}
+            
             onClick={ () => 
             navigate(ADMIN_ROUTE)}
             >
               Центр упрвления
             </Button>
 
+            
+            
+
             <Button
+            className='ms-2'
              variant={"dark"}
              onClick={() => logOut()}
-            className={"ms-2"}
+            
             >
               Выйти
             </Button>
@@ -64,6 +82,8 @@ const NavBar = observer(() => {
           :
           <Nav style={{color: 'black', marginLeft: 'auto'}}>
             <Button variant={"dark"}  onClick={ () => navigate(LOGIN_ROUTE)}>Авторизация</Button>
+
+
           </Nav>
 }
         </Container>

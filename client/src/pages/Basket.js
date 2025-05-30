@@ -5,6 +5,8 @@ import { getBasket, removeFromBasket } from '../http/basketApi';
 import { observer } from 'mobx-react-lite';
 import { SHOP_ROUTE } from '../utils/consts';
 import { Link } from 'react-router-dom';
+import "../styles/Basket.css";
+
 
 const Basket = observer(() => {
     const { user } = useContext(Context);
