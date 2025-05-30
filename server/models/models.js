@@ -14,6 +14,8 @@ const Basket = sequelize.define( 'basket', {
 
 const BasketGoods = sequelize.define( 'basket_goods', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    basketId: { type: DataTypes.INTEGER, allowNull: false },
+    goodsId: { type: DataTypes.INTEGER,  allowNull: false },
 })
 const Goods = sequelize.define( 'goods', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -55,10 +57,6 @@ Basket.belongsTo(User)
 User.hasMany(Rating)
 Rating.belongsTo(User)
 
-Basket.hasMany(BasketGoods)
-BasketGoods.belongsTo(Basket)
-
-
 Type.hasMany(Goods)
 Goods.belongsTo(Type)
 
@@ -70,6 +68,14 @@ Rating.belongsTo(Goods)
 
 Goods.hasMany(BasketGoods)
 BasketGoods.belongsTo(Goods)
+
+Basket.hasMany(BasketGoods, {
+  foreignKey: 'basketId',
+  
+});
+
+BasketGoods.belongsTo(Goods, { as: 'goods', foreignKey: 'goodsId' });
+
 
 Goods.hasMany(GoodsInfo, {as: 'info', foreignKey: 'goodsId'});
 GoodsInfo.belongsTo(Goods, {foreignKey: 'goodsId'})
