@@ -37,8 +37,14 @@ const Brand = sequelize.define( 'brand', {
 
 const Rating = sequelize.define( 'rating', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    rate:{type:DataTypes.INTEGER, allowNull: false},
-})
+    userId: {type: DataTypes.INTEGER, allowNull: false}, // Связываем с пользователем
+    goodsId: {type: DataTypes.INTEGER, allowNull: false}, // Связываем с товаром
+    rate: {type: DataTypes.INTEGER, allowNull: false},
+}, {
+    indexes: [
+        { unique: true, fields: ['userId', 'goodsId'] } // Гарантирует уникальность оценки
+    ]
+});
 
 const GoodsInfo = sequelize.define( 'goods_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
